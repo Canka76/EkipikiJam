@@ -17,6 +17,15 @@ public class FpsController : MonoBehaviour
 
     private bool ShouldCrouch =>
         Input.GetKeyDown(crouchKey) && _characterController.isGrounded && !duringCrouchAnimation;
+    
+    [Header("Dash Parameters")]
+    [SerializeField] private float dashForce = 20f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 2f;
+    [SerializeField] private KeyCode dashKey = KeyCode.LeftAlt;
+
+    private bool canDash = true;
+    private Coroutine dashRoutine;
 
     [Header("Movement Parameters")] 
     [SerializeField] float moveSpeed = 3f;
@@ -150,6 +159,11 @@ public class FpsController : MonoBehaviour
     
     void Update()
     {
+        if (Input.GetKeyDown(dashKey) && canDash)
+        {
+            StartDash();
+        }
+        
         if (CanMove)
         {
             HandleMovementInput();
@@ -193,6 +207,29 @@ public class FpsController : MonoBehaviour
             }
             ApplyFinalMovement();
         }
+    }
+    
+    private void StartDash()
+    {
+        if (dashRoutine != null)
+        {
+            StopCoroutine(dashRoutine);
+        }
+        dashRoutine = StartCoroutine(Dash());
+    }
+    
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        float originalSpeed = moveSpeed;
+        moveSpeed = dashForce;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        moveSpeed = originalSpeed;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     void HandleStamina()

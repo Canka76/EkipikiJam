@@ -253,8 +253,8 @@ GameObject:
   - component: {fileID: 362881835}
   - component: {fileID: 362881834}
   - component: {fileID: 362881833}
-  - component: {fileID: 362881831}
   - component: {fileID: 362881838}
+  - component: {fileID: 362881839}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -262,38 +262,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &362881831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362881830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83777718f8dd6744b88fb1a1d725c7fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprintKey: 304
-  jumpKey: 32
-  crouchKey: 306
-  interactionKey: 102
-  lookSpeedX: 5
-  lookSpeedY: 5
-  upperLookLimit: 80
-  lowerLookLimit: 80
-  moveSpeed: 3
-  sprintSpeed: 6
-  jumpForce: 8
-  gravity: 30
-  canSprint: 1
-  canJump: 1
-  canInteract: 1
-  interactionRaycastOrigin: {x: 0.5, y: 0.5, z: 0}
-  interactionDistance: 2
-  interactionLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!143 &362881833
 CharacterController:
   m_ObjectHideFlags: 0
@@ -439,6 +407,77 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &362881839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362881830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c306a73f4d97a4ab9994bee28f1bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashForce: 20
+  dashDuration: 0.2
+  dashCooldown: 2
+  dashKey: 308
+  moveSpeed: 3
+  sprintSpeed: 6
+  crouchspeed: 1.5
+  slopeSpeed: 8
+  canSprint: 1
+  canJump: 1
+  canCrouch: 1
+  canHeadBob: 0
+  willSlideOnSlopes: 1
+  canZoom: 1
+  canInteract: 0
+  useFootSteps: 0
+  useStamina: 1
+  canUseDoors: 1
+  baseStepSpeed: 0.5
+  crouchStepMultipler: 1.5
+  sprintStepMultipler: 0.6
+  footStepAudioSource: {fileID: 0}
+  woodClips: []
+  metalClips: []
+  grassClips: []
+  interactionRayPoint: {x: 0, y: 0, z: 0}
+  interactionDistance: 0
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  crouchHeight: 0.5
+  standingHeight: 0.5
+  timeToCrouch: 0.5
+  crouchingCenter: {x: 0, y: 0.5, z: 0}
+  standingCenter: {x: 0, y: 0, z: 0}
+  walkBobSpeed: 14
+  walkBobAmount: 0.05
+  sprintBobSpeed: 18
+  sprintBobAmount: 0.1
+  crouchBobSpeed: 8
+  crouchBobAmount: 0.025
+  jumpForce: 8
+  gravity: 30
+  lookSpeedX: 5
+  lookSpeedY: 5
+  upperLookLimit: 80
+  lowerLookLimit: 80
+  sprintKey: 304
+  jumpKey: 32
+  crouchKey: 306
+  zoomKey: 324
+  interactKey: 102
+  maxStamina: 100
+  staminaRegen: 5
+  staminaUseMult: 5
+  staminaTimeIncrement: 0.1
+  staminaValueIncrement: 2
+  timeBeforeStaminaRegenStarts: 2
+  timeToZoom: 0.3
 --- !u!1 &496255536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,8 +1287,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1556889356145444800, guid: a9070e51c166043489e4fec610685413, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556889356145444800, guid: a9070e51c166043489e4fec610685413, type: 3}
       propertyPath: SizeBySpeedModule.enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556889356145444800, guid: a9070e51c166043489e4fec610685413, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1556889356145444800, guid: a9070e51c166043489e4fec610685413, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
@@ -1329,6 +1376,6 @@ SceneRoots:
   - {fileID: 362881837}
   - {fileID: 1501111856129456700}
   - {fileID: 2663803081368402921}
-  - {fileID: 938991178}
   - {fileID: 6138955300540583624}
+  - {fileID: 938991178}
   - {fileID: 903202371}
