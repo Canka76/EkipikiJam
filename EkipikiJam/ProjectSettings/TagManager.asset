@@ -6,8 +6,6 @@ TagManager:
   tags:
   - EnemyProjectile
   - PlayerProjectile
-  - exBullet
-  - Firezone
   layers:
   - Default
   - TransparentFX
