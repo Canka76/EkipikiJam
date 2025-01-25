@@ -20,10 +20,12 @@ public class RangedEnemy : MonoBehaviour
 
     private enum EnemyState { Chasing, Attacking }
     private EnemyState currentState;
+    
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        projectilePrefab = GameObject.FindGameObjectWithTag("EnemyProjectile");
         currentState = EnemyState.Chasing;
     }
 
