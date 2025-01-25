@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class RegenPool : MonoBehaviour
 {
     public GameObject player;
     
