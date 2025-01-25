@@ -154,8 +154,6 @@ MonoBehaviour:
   lifetime: 5
   ExplosionEffect: {fileID: 1692848359350303833, guid: a9070e51c166043489e4fec610685413, type: 3}
   particleSystem: {fileID: 0}
-<<<<<<< HEAD
-=======
 --- !u!114 &7521785149779547170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,4 +168,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 5
   explosionDamage: 50
->>>>>>> 4bc2a74a6ea68fbf400a393e99aa393b8521504a
