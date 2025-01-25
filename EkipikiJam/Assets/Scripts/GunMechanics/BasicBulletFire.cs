@@ -5,7 +5,10 @@ public class GunFire : MonoBehaviour
     public float speed = 20f;            // Speed of the projectile
     public float lifetime = 5f;         // Time before the projectile is destroyed
     private Rigidbody rb;               // Reference to the Rigidbody
-
+    
+    [SerializeField] float damage = 25f;
+    [SerializeField] string damageType = "Basic";
+    
     void Start()
     {
         // Ensure Rigidbody is assigned
@@ -22,7 +25,12 @@ public class GunFire : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Handle collision (e.g., damage, effects)
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage, "Basic");
+        }
         Debug.Log($"Projectile hit {collision.gameObject.name}");
         Destroy(gameObject); // Destroy on impact
     }
