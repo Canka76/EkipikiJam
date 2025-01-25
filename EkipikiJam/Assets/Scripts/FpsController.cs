@@ -10,6 +10,9 @@ using Vector3 = UnityEngine.Vector3;
 
 public class FpsController : MonoBehaviour
 {
+   
+    
+    
     public bool CanMove { get; private set; } = true;
 
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
@@ -32,6 +35,7 @@ public class FpsController : MonoBehaviour
     [SerializeField] float sprintSpeed = 6f;
     [SerializeField] float crouchspeed = 1.5f;
     [SerializeField] float slopeSpeed = 8f;
+    [SerializeField] float platformMultiplier = 2f;
 
     [Header("Functional Options")] 
     [SerializeField] private bool canSprint = true;
@@ -410,16 +414,24 @@ public class FpsController : MonoBehaviour
 
     void ApplyFinalMovement()
     {
-        if (!_characterController.isGrounded)
-        {
-            moveDirections.y -= gravity * Time.deltaTime;
-        }
 
-        if (willSlideOnSlopes && isSliding)
-        {
-            moveDirections += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
-        }
-        _characterController.Move(moveDirections * Time.deltaTime);
+         if (!_characterController.isGrounded)
+         {
+             moveDirections.y -= gravity * Time.deltaTime;
+         }
+
+         if (!_characterController.isGrounded)
+         {
+            moveDirections.y -= gravity * Time.deltaTime;
+         }
+
+         if (willSlideOnSlopes && isSliding)
+         { 
+             moveDirections += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
+         }
+         _characterController.Move(moveDirections * Time.deltaTime);
+        
+       
     }
 
     void HandleHeadBob()
@@ -510,4 +522,15 @@ public class FpsController : MonoBehaviour
 
         regeneratingStamina = null;
     }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Platform"))
+        {
+            moveDirections.y += gravity * Time.deltaTime * platformMultiplier;
+        }
+       
+    }
+    
 }
