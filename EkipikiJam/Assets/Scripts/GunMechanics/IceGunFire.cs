@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class GunFire : MonoBehaviour
+public class IceGunFire : MonoBehaviour
 {
-    public float speed = 20f;            // Speed of the projectile
-    public float lifetime = 5f;         // Time before the projectile is destroyed
+    [SerializeField] float speed = 20f;            // Speed of the projectile
+    [SerializeField] float lifetime = 5f;         // Time before the projectile is destroyed
     private Rigidbody rb;               // Reference to the Rigidbody
-    
+
     [SerializeField] float damage = 25f;
     [SerializeField] string damageType = "Basic";
-    
     void Start()
     {
         // Ensure Rigidbody is assigned
@@ -29,8 +28,9 @@ public class GunFire : MonoBehaviour
 
         if (damageable != null)
         {
-            damageable.TakeDamage(damage, "Basic");
+            damageable.TakeDamage(damage, "Ice");
         }
+        
         Debug.Log($"Projectile hit {collision.gameObject.name}");
         Destroy(gameObject); // Destroy on impact
     }

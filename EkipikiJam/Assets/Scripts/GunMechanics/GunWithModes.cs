@@ -1,7 +1,16 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class GunWithModes : MonoBehaviour
 {
+    public GameObject UltGun;
+   
+    [SerializeField]
+    private float holdDuration = 2.0f; // Time in seconds to trigger the function
+
+    private float holdTime = 0f;
+    private bool isHolding = false;
+
     [System.Serializable]
     public class GunMode
     {
@@ -23,6 +32,55 @@ public class GunWithModes : MonoBehaviour
     {
         HandleInput();
         HandleFireCooldown();
+        
+        ULtGun();
+        
+    }
+
+    private void ULtGun()
+    {
+        if (Input.GetMouseButton(0) && currentModeIndex.Equals(2))
+        {
+            if (!isHolding)
+            {
+                isHolding = true; // Start tracking the hold
+                holdTime = 0f;
+            }
+
+            // Increment the hold time
+            holdTime += Time.deltaTime;
+            
+            UltGun.SetActive(true);
+            UltGun.transform.DOScale(new Vector3(.30f, .30f, .30f), holdDuration);
+            
+            
+            if (holdTime >= holdDuration)
+            {
+                TriggerFunction();
+                ResetHold();
+                    
+            }
+        }
+        else
+        {
+            // Reset if the mouse button is released
+            ResetHold();
+        }
+    }
+    
+    private void ResetHold()
+    {
+        isFiring = false;
+        holdTime = 0f;
+        UltGun.transform.DOScale(new Vector3(.10f, .10f, .10f), 0.3f);
+        UltGun.SetActive(false);
+    }
+        
+    private void TriggerFunction()
+    {
+        var currentMode = gunModes[currentModeIndex];
+        isFiring = true;
+        TryFire(currentMode);
     }
 
     private void HandleInput()
@@ -42,20 +100,21 @@ public class GunWithModes : MonoBehaviour
         {
             var currentMode = gunModes[currentModeIndex];
 
-            if (currentMode.autoFire && Input.GetButton("Fire1")) // Hold down for auto-fire modes
+            if (currentMode.autoFire && Input.GetButton("Fire1") && !currentModeIndex.Equals(3)) // Hold down for auto-fire modes
             {
                 isFiring = true;
                 TryFire(currentMode);
             }
-            else if (Input.GetButtonDown("Fire1")) // Single shot or burst on mouse click
+            else if (Input.GetButtonDown("Fire1") && !currentModeIndex.Equals(3)) // Single shot or burst on mouse click
             {
                 isFiring = true;
                 TryFire(currentMode);
             }
-            else if (Input.GetButtonUp("Fire1"))
+            else if (Input.GetButtonUp("Fire1") && !currentModeIndex.Equals(3))
             {
                 isFiring = false;
             }
+            
         }
     }
 
