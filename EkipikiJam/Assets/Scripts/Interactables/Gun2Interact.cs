@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gun1Interact : Interactable
+public class Gun2Interact : Interactable
 {
     public SkillManager skillManager;
     
@@ -14,7 +14,7 @@ public class Gun1Interact : Interactable
 
     public override void OnInteract()
     {
-        Debug.Log("Interacted with Gun1");
-        skillManager.ActivateMode("BasicBullet");
+        Debug.Log("Interacted with Gun2");
+        skillManager.ActivateMode("ExplodingBullet");
     }
 }
