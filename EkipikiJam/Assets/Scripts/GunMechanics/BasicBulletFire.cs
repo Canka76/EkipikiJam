@@ -22,7 +22,7 @@ public class GunFire : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Handle collision (e.g., damage, effects)
+        
         Debug.Log($"Projectile hit {collision.gameObject.name}");
         Destroy(gameObject); // Destroy on impact
     }
