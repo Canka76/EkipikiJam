@@ -134,15 +134,15 @@ Material:
     - _gradiant: 0
     - _gradiant2: 0
     - _gradiant3: 0
-    - _power: 2.36
-    - _power2: 3.62
-    - _power3: -0.99
+    - _power: 2.52
+    - _power2: -0.08
+    - _power3: -0.72
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 2.2722511, g: 0, b: 0.015449942, a: 1}
+    - _Color: {r: 0.92726135, g: 0.10322335, b: 0.35587388, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _color2: {r: 2.801145, g: 2.8011107, b: 0, a: 0}
-    - _color3: {r: 0.5245282, g: 0.30495676, b: 0, a: 0}
+    - _color2: {r: 0, g: 1.2559907, b: 0.25814158, a: 0}
+    - _color3: {r: 0.8792453, g: 0.02866686, b: 0.004976788, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
