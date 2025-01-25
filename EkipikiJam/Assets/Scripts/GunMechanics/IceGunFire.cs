@@ -4,10 +4,11 @@ public class IceGunFire : MonoBehaviour
 {
     [SerializeField] float speed = 20f;            // Speed of the projectile
     [SerializeField] float lifetime = 5f;         // Time before the projectile is destroyed
-    private Rigidbody rb;               // Reference to the Rigidbody
+    private Rigidbody rb;                         // Reference to the Rigidbody
 
     [SerializeField] float damage = 25f;
     [SerializeField] string damageType = "Basic";
+
     void Start()
     {
         // Ensure Rigidbody is assigned
@@ -30,8 +31,24 @@ public class IceGunFire : MonoBehaviour
         {
             damageable.TakeDamage(damage, "Ice");
         }
-        
+
+        IAdjustableSpeed adjustableSpeed = collision.gameObject.GetComponent<IAdjustableSpeed>();
+
+        if (adjustableSpeed != null)
+        {
+            adjustableSpeed.AdjustSpeed();
+        }
+
         Debug.Log($"Projectile hit {collision.gameObject.name}");
         Destroy(gameObject); // Destroy on impact
     }
 }
+
+// Interface for objects with adjustable speed
+public interface IAdjustableSpeed
+{
+    void AdjustSpeed();
+}
+
+// Example implementation for an object with adjustable speed
+
