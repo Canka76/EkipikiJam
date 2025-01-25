@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 362881839}
   - component: {fileID: 362881840}
   - component: {fileID: 362881841}
+  - component: {fileID: 362881842}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -583,6 +584,7 @@ MonoBehaviour:
   sprintSpeed: 6
   crouchspeed: 1.5
   slopeSpeed: 8
+  platformMultiplier: 2
   canSprint: 1
   canJump: 1
   canCrouch: 1
@@ -657,7 +659,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362881830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe5abaf24c2d954ba9bee0bb9f45598, type: 3}
   m_Name: 
@@ -666,6 +668,24 @@ MonoBehaviour:
   skillPanel: {fileID: 978551864}
   skillCellPrefab: {fileID: 1194142100}
   skillCellSelected: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &362881842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362881830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df41c573a43b5a4f804de0a4d48ffbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunWithModes: {fileID: 1998415098}
+  skillPanel: {fileID: 978551864}
+  skillCellPrefab: {fileID: 1194142100}
+  skillCellSelected: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  explosiveCooldown: 5
+  iceGunCooldown: 5
 --- !u!1 &444578033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,7 +1715,7 @@ MonoBehaviour:
   gunModes:
   - modeName: BasicBullet
     projectilePrefab: {fileID: 1102466446378017921, guid: 5d740db1077ff2f4492f67f681d85ac2, type: 3}
-    fireRate: 1
+    fireRate: 5
     burstCount: 0
     autoFire: 0
   - modeName: ExplodingBullet
