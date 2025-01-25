@@ -85,15 +85,6 @@ public class GunWithModes : MonoBehaviour
 
     private void HandleInput()
     {
-        // Switch modes (e.g., using the number keys or a button)
-        if (Input.GetKeyDown(KeyCode.E)) // Press 'E' to switch to the next mode
-        {
-            SwitchMode(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Q)) // Press 'Q' to switch to the previous mode
-        {
-            SwitchMode(-1);
-        }
 
         // Fire based on the current mode
         if (gunModes.Length > 0)
@@ -164,9 +155,8 @@ public class GunWithModes : MonoBehaviour
         }
     }
 
-    private void SwitchMode(int direction)
+    public void SetMode(GunMode mode)
     {
-        currentModeIndex = (currentModeIndex + direction + gunModes.Length) % gunModes.Length;
-        Debug.Log($"Switched to mode: {gunModes[currentModeIndex].modeName}");
+        currentModeIndex = System.Array.IndexOf(gunModes, mode);
     }
 }

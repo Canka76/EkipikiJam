@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fcda1affda6b643ab17f65638066a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 15
   lifetime: 5
   ExplosionEffect: {fileID: 1692848359350303833, guid: a9070e51c166043489e4fec610685413, type: 3}
   particleSystem: {fileID: 0}
