@@ -730,6 +730,7 @@ MonoBehaviour:
   sprintSpeed: 10
   crouchspeed: 1.5
   slopeSpeed: 8
+  platformMultiplier: 2
   canSprint: 1
   canJump: 1
   canCrouch: 1
@@ -797,8 +798,6 @@ MonoBehaviour:
   skillPanel: {fileID: 7536686501124153260}
   skillCellPrefab: {fileID: 1409159068501399571}
   skillCellSelected: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  explosiveCooldown: 10
-  iceGunCooldown: 3
 --- !u!114 &362881841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,7 +1122,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 105939f011b55cf40ba09ba684542d78, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d4998fd6475000e4cba67752f12c94a7, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &563076174
 Transform:
@@ -1444,7 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRange: 25
   attackRange: 15
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 7271497209142940033, guid: a67405271ab9dfc4ca41ca1cafafd176, type: 3}
   firePoint: {fileID: 290311882}
   fireRate: 0.5
   player: {fileID: 362881837}
@@ -1531,12 +1530,11 @@ Transform:
   m_GameObject: {fileID: 1631981944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.14, y: 1.5, z: 13.1}
+  m_LocalPosition: {x: -5.14, y: 1.5, z: 11.09}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 76691664}
-  - {fileID: 5371942514863475548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1631981950
@@ -1821,6 +1819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UltGun: {fileID: 3650536695851338769, guid: 3604a412b70c5c842ac6a7f88df98ee2, type: 3}
   holdDuration: 2
+  isHolding: 0
   gunModes:
   - modeName: BasicBullet
     projectilePrefab: {fileID: 1102466446378017921, guid: 5d740db1077ff2f4492f67f681d85ac2, type: 3}
@@ -2325,7 +2324,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3324160235753997479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f599764360944434985099ed55d88e38, type: 3}
   m_Name: 
@@ -2402,11 +2401,11 @@ Transform:
   m_GameObject: {fileID: 3324160235753997479}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.65, y: -0.083, z: -1.8100002}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 2.8100004, y: 1.251, z: 15.26}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1631981949}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5657841698667811467
 MeshFilter:
@@ -2759,3 +2758,4 @@ SceneRoots:
   - {fileID: 563076174}
   - {fileID: 1631981949}
   - {fileID: 1399456000}
+  - {fileID: 5371942514863475548}

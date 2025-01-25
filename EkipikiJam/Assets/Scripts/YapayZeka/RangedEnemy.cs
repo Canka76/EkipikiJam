@@ -20,17 +20,35 @@ public class RangedEnemy : MonoBehaviour
 
     private enum EnemyState { Chasing, Attacking }
     private EnemyState currentState;
-    
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        // Find player and projectile by tag
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Player with tag 'Player' not found!");
+        }
+
         projectilePrefab = GameObject.FindGameObjectWithTag("EnemyProjectile");
+        if (projectilePrefab == null)
+        {
+            Debug.LogError("Projectile with tag 'EnemyProjectile' not found!");
+        }
+
         currentState = EnemyState.Chasing;
     }
 
     void Update()
     {
+        if (player == null) return; // Exit if player reference is missing
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         switch (currentState)
@@ -75,7 +93,12 @@ public class RangedEnemy : MonoBehaviour
     {
         if (projectilePrefab != null && firePoint != null)
         {
-            Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.constraints = RigidbodyConstraints.None;
+            }
         }
     }
 
