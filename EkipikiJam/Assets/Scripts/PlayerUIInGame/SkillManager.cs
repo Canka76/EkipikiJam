@@ -48,6 +48,7 @@ public class SkillManager : MonoBehaviour
    private void SwitchMode(int direction)
    {
       selectedIndex = (selectedIndex + direction + gunWithModes.gunModes.Length) % gunWithModes.gunModes.Length;
+      gunWithModes.SetMode(gunWithModes.gunModes[selectedIndex]);
       Debug.Log($"Switched to mode: {gunWithModes.gunModes[selectedIndex].modeName}");
    }
 }
