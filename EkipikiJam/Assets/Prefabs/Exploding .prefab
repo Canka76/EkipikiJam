@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 74238107928507605}
   - component: {fileID: 6832907266772189805}
   - component: {fileID: 5757374715393117817}
-  - component: {fileID: 8764657757812183992}
   - component: {fileID: 6478106532726303309}
   - component: {fileID: 1588890883587399248}
   m_Layer: 0
@@ -111,24 +110,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8764657757812183992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981820838414063297}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbc18bec88e73247987d2ecb74dc317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  growthRate: 15
-  maxSize: 3
-  explosionDuration: 10
-  destroyAfterExplosion: 1
-  speed: 20
-  lifetime: 10
 --- !u!54 &6478106532726303309
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -171,3 +152,4 @@ MonoBehaviour:
   speed: 20
   lifetime: 5
   ExplosionEffect: {fileID: 1692848359350303833, guid: a9070e51c166043489e4fec610685413, type: 3}
+  particleSystem: {fileID: 0}

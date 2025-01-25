@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2216694468851355602}
   - component: {fileID: 5816627708742374396}
   - component: {fileID: 6210987071333930270}
-  - component: {fileID: 2110292802675471161}
   - component: {fileID: 548124625301716141}
+  - component: {fileID: -3744636969347045096}
   m_Layer: 0
   m_Name: UltGun
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.58, y: 1.19, z: 1.17}
-  m_LocalScale: {x: 0.10000003, y: 0.10000003, z: 0.10000003}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,20 +110,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2110292802675471161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650536695851338769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc74917a13120841951c3851ea20da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  lifetime: 5
 --- !u!54 &548124625301716141
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,3 +137,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3744636969347045096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650536695851338769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5926d216c3d8bb341baa1082ee9dff6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
