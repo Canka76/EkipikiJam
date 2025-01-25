@@ -9,8 +9,6 @@ public class AI : MonoBehaviour
     public Transform agentTransform;
     NavMeshAgent agent;
     public float distanceFollow = 10f;
-    public float rotationSpeed = 2f;
-    private bool isOrbiting = false; 
 
     
     void Start()
