@@ -15,6 +15,11 @@ public class SkillManager : MonoBehaviour
    private int selectedIndex = 0;
    private List<GunWithModes.GunMode> activeModes = new List<GunWithModes.GunMode>();
 
+   private void Start()
+   {
+      gunWithModes.SetMode(null);
+   }
+
    private void Update()
    {
       if (Input.GetKeyDown(KeyCode.E))
@@ -35,20 +40,35 @@ public class SkillManager : MonoBehaviour
 
    public void ActivateMode(string modeName)
    {
-      GunWithModes.GunMode mode = gunWithModes.gunModes.Where(gunMode => gunMode.modeName == modeName).FirstOrDefault();
-      if (mode != null && !activeModes.Contains(mode))
+      foreach (var mode in gunWithModes.gunModes)
       {
-         activeModes.Add(mode);
-         gunWithModes.SetMode(mode);
-         GameObject skillCell = Instantiate(skillCellPrefab, skillPanel.transform);
-         skillCell.name = modeName;
+         if (mode.modeName == modeName)
+         {
+            Debug.Log(mode.modeName);
+            if (!activeModes.Contains(mode))
+            {
+               activeModes.Add(mode);
+               selectedIndex = activeModes.IndexOf(mode);
+               gunWithModes.SetMode(mode);
+               GameObject skillCell = Instantiate(skillCellPrefab, skillPanel.transform);
+               skillCell.name = modeName;
+            }
+         }
+      }
+      
+      if (activeModes.Count > 0)
+      { 
+         gunWithModes.GetComponent<MeshRenderer>().enabled = true;
       }
    }
    
    private void SwitchMode(int direction)
    {
-      selectedIndex = (selectedIndex + direction + gunWithModes.gunModes.Length) % gunWithModes.gunModes.Length;
-      gunWithModes.SetMode(gunWithModes.gunModes[selectedIndex]);
-      Debug.Log($"Switched to mode: {gunWithModes.gunModes[selectedIndex].modeName}");
+      if (activeModes.Count > 0)
+      {
+         selectedIndex = (selectedIndex + direction + activeModes.Count) % activeModes.Count;
+         gunWithModes.SetMode(activeModes[selectedIndex]);
+         Debug.Log($"Switched to mode: {activeModes[selectedIndex].modeName}");
+      }
    }
 }

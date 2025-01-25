@@ -9,7 +9,7 @@ public class GunWithModes : MonoBehaviour
     private float holdDuration = 2.0f; // Time in seconds to trigger the function
 
     private float holdTime = 0f;
-    private bool isHolding = false;
+    public bool isHolding = false;
 
     [System.Serializable]
     public class GunMode
@@ -43,10 +43,9 @@ public class GunWithModes : MonoBehaviour
         {
             if (!isHolding)
             {
-                isHolding = true; // Start tracking the hold
-                holdTime = 0f;
+                return;
             }
-
+            holdTime = 0f;
             // Increment the hold time
             holdTime += Time.deltaTime;
             
@@ -78,6 +77,10 @@ public class GunWithModes : MonoBehaviour
         
     private void TriggerFunction()
     {
+        if (currentModeIndex.Equals(-1))
+        {
+            return;
+        }
         var currentMode = gunModes[currentModeIndex];
         isFiring = true;
         TryFire(currentMode);
@@ -87,7 +90,7 @@ public class GunWithModes : MonoBehaviour
     {
 
         // Fire based on the current mode
-        if (gunModes.Length > 0)
+        if (gunModes.Length > 0 && !currentModeIndex.Equals(-1))
         {
             var currentMode = gunModes[currentModeIndex];
 
@@ -157,6 +160,11 @@ public class GunWithModes : MonoBehaviour
 
     public void SetMode(GunMode mode)
     {
+        if (mode == null)
+        {
+            currentModeIndex = -1;
+            return;
+        }
         currentModeIndex = System.Array.IndexOf(gunModes, mode);
     }
 }
