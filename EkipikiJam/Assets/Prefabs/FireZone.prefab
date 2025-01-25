@@ -4843,6 +4843,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4761401894155886901}
   - component: {fileID: 3639905209785952955}
+  - component: {fileID: 8937648324660350886}
+  - component: {fileID: 6335582037758416422}
   m_Layer: 0
   m_Name: FireZone
   m_TagString: Untagged
@@ -4883,7 +4885,42 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0.038070202, y: 0.3, z: -0.078261614}
+--- !u!114 &8937648324660350886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231356230773008603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2bb909dfb70e74285ff9cbabde717a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 10
+  targetTag: Player
+--- !u!65 &6335582037758416422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231356230773008603}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.0093496
-  m_Center: {x: 0.038070202, y: -0.79999995, z: -0.078261614}
+  m_Size: {x: 2.8130407, y: 0.67329264, z: 2.5203545}
+  m_Center: {x: 0.033902645, y: 0.12261391, z: 0.084038615}
