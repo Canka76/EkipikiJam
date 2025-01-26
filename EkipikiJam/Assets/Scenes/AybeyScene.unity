@@ -3129,19 +3129,19 @@ MonoBehaviour:
     fireRate: 7
     burstCount: 0
     autoFire: 0
-    gunShot: {fileID: 8300000, guid: a18d8e41aebe645ed84d7508c0b68227, type: 3}
+    gunShot: {fileID: 8300000, guid: 53cab3056487a164eb2f322989c952e1, type: 3}
   - modeName: ExplodingBullet
     projectilePrefab: {fileID: 1981820838414063297, guid: ee0e12aa92bc86846b9b10c5d30cbe75, type: 3}
     fireRate: 1
     burstCount: 0
     autoFire: 0
-    gunShot: {fileID: 8300000, guid: 71cd1cba4d2d644c49e329fc19547025, type: 3}
+    gunShot: {fileID: 8300000, guid: a4f5070844cd6624bab1af2e379d1153, type: 3}
   - modeName: Ice
     projectilePrefab: {fileID: 1896896747279522168, guid: 9dfbe57b3081ba54db17b69ece89b341, type: 3}
     fireRate: 1
     burstCount: 0
     autoFire: 0
-    gunShot: {fileID: 8300000, guid: e061c94ead3404fc7aabc741186d2ef5, type: 3}
+    gunShot: {fileID: 8300000, guid: 53cab3056487a164eb2f322989c952e1, type: 3}
   - modeName: Ult
     projectilePrefab: {fileID: 3650536695851338769, guid: 3604a412b70c5c842ac6a7f88df98ee2, type: 3}
     fireRate: 1
