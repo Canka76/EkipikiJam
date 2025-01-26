@@ -74,10 +74,13 @@ public class RangedEnemy : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        transform.LookAt(player);
+
     }
 
     private void AttackPlayer()
     {
+        transform.Rotate(0f,0f,90f);
         agent.SetDestination(transform.position); // Stop moving
         transform.LookAt(player);
 

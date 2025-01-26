@@ -40,7 +40,7 @@ public class BipolarAI : MonoBehaviour
             Debug.Log("Çalışmadı");
             ai.distanceFollow = 3;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(15);
         StartCoroutine(changeEmotion());
     }
 }

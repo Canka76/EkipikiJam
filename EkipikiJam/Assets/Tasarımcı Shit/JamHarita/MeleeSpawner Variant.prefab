@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeSpawner Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3511982979829009982, guid: a1caf5866b3670d4db8cb79ea3a3892e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4320853395333010564, guid: a1caf5866b3670d4db8cb79ea3a3892e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.26
