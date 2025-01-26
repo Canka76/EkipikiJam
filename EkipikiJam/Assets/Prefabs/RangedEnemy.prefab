@@ -158,10 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 25
-  attackRange: 8
+  attackRange: 30
   projectilePrefab: {fileID: 8390345949114784278, guid: 676ac65cef729744eba57ad444602b7a, type: 3}
   firePoint: {fileID: 2060058749193817879}
-  fireRate: 0.5
+  fireRate: 2
   player: {fileID: 0}
 --- !u!195 &7648553353573778648
 NavMeshAgent:
@@ -211,6 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 250
+  scaleFactor: 1.2
+  scaleDuration: 0.2
 --- !u!54 &-5626394595433560610
 Rigidbody:
   m_ObjectHideFlags: 0
