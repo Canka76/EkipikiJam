@@ -43,8 +43,9 @@ public class EscapeMenu : MonoBehaviour
         AudioListener.pause = false;
         Time.timeScale = 1f;
         gamePause = false;
-        if (menu != null)
+        if (menu != null && isOpen)
         {
+            isOpen = false;
             menu.SetActive(false);
         }
         Cursor.lockState = CursorLockMode.None;
@@ -64,8 +65,9 @@ public class EscapeMenu : MonoBehaviour
         AudioListener.pause = true;
         Time.timeScale = 0f;
         gamePause = true;
-        if (menu != null)
+        if (menu != null && !isOpen)
         {
+            isOpen = true;
             menu.SetActive(true);
         }
         Cursor.lockState = CursorLockMode.Confined;
@@ -93,5 +95,6 @@ public class EscapeMenu : MonoBehaviour
     public void OnButtonRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ResumeGame(escapeMenu);
     }
 }
