@@ -26,11 +26,13 @@ public class kestaneArmor : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().enabled = false;
         armorAnimation.SetBool("armor",false);
         kestane.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        kestane.GetComponent<ShootAI>().enabled = false;
         ai.enabled = false;
         yield return new WaitForSeconds(5);
         gameObject.GetComponent<SphereCollider>().enabled = true;
         armorAnimation.SetBool("armor",true);
         kestane.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+        kestane.GetComponent<ShootAI>().enabled = true;
         ai.enabled = true;
     }
 
