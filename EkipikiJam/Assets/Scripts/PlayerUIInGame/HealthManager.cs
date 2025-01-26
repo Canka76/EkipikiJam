@@ -30,8 +30,6 @@ public class HealthManager : MonoBehaviour
         UpdateHealthBar();
         if (gameOverPanel != null && currentHealth == 0)
         {
-            var width = gameOverPanel.GetComponent<RectTransform>().rect.width;
-            gameOverPanel.transform.position -= new Vector3(width, 0, 0);
             if (escapeMenu != null)
             {
                 escapeMenu.PauseGame(gameOverPanel);

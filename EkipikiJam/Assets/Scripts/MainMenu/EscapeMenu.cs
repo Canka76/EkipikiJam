@@ -45,8 +45,7 @@ public class EscapeMenu : MonoBehaviour
         gamePause = false;
         if (menu != null)
         {
-            var width = menu.GetComponent<RectTransform>().rect.width;
-            menu.transform.position += new Vector3(width, 0, 0);
+            menu.SetActive(false);
         }
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
@@ -67,8 +66,7 @@ public class EscapeMenu : MonoBehaviour
         gamePause = true;
         if (menu != null)
         {
-            var width = menu.GetComponent<RectTransform>().rect.width;
-            menu.transform.position -= new Vector3(width, 0, 0);
+            menu.SetActive(true);
         }
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
