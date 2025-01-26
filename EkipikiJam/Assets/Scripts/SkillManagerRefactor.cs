@@ -14,6 +14,7 @@ public class SkillManagerRefactor : MonoBehaviour
     [SerializeField] private float explosiveCooldown = 5f;
     [SerializeField] private float iceGunCooldown = 5f;
 
+    
     private int selectedIndex = 0;
     private List<GunWithModes.GunMode> activeModes = new List<GunWithModes.GunMode>();
     private float[] cooldownTimers;
