@@ -15,11 +15,17 @@ public class miniKestaneArmor : MonoBehaviour
         
     }
     
-    void OnTriggerEnter(Collider other)
+    void OnTriggerenter(Collider other)
     {
         if(other.gameObject.tag == "exBullet")
         {
             Destroy(gameObject);
         }
+
+        else if(other.gameObject.tag == "Bullet")
+            {
+                Destroy(other.gameObject);
+                Debug.Log("Mermi");
+            }
     }
 }
