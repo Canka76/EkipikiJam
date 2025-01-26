@@ -10,6 +10,9 @@ TagManager:
   - exBullet
   - Enemy
   - Bullet
+  - Theme2
+  - Theme3
+  - Theme4
   layers:
   - Default
   - TransparentFX
