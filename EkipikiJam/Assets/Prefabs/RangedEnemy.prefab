@@ -172,7 +172,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.0026804057, y: 0.98712695, z: -0.01663578, w: 0.1590488}
   m_LocalPosition: {x: 0.20134702, y: 1.5833334, z: 2.6118724}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3043873270092022236}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 25
-  attackRange: 15
+  attackRange: 8
   projectilePrefab: {fileID: 8390345949114784278, guid: 676ac65cef729744eba57ad444602b7a, type: 3}
   firePoint: {fileID: 3715405821294591816}
   fireRate: 0.5

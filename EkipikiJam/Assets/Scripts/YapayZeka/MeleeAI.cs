@@ -18,15 +18,29 @@ public class MeleeAI : MonoBehaviour
 
     private enum EnemyState { Chasing, Attacking }
     private EnemyState currentState;
-    
+
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        // Find player by tag
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Player with tag 'Player' not found!");
+        }
+
         currentState = EnemyState.Chasing;
     }
-    
+
     void Update()
     {
+        if (player == null) return; // Exit if player reference is missing
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         switch (currentState)
@@ -48,26 +62,33 @@ public class MeleeAI : MonoBehaviour
                 break;
         }
     }
-    
+
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        if (agent != null && player != null)
+        {
+            agent.SetDestination(player.position);
+        }
     }
-    
+
     private void AttackPlayer()
     {
         fireTimer += Time.deltaTime;
         if (fireTimer >= attackRate)
         {
-            player.GetComponent<HealthManager>().TakeDamage(attackDamage);
+            if (player != null)
+            {
+                HealthManager healthManager = player.GetComponent<HealthManager>();
+                if (healthManager != null)
+                {
+                    healthManager.TakeDamage(attackDamage);
+                }
+                else
+                {
+                    Debug.LogError("Player does not have a HealthManager component!");
+                }
+            }
             fireTimer = 0f;
         }
     }
-    
-    
-    
-    
-    
-    
-    
 }
