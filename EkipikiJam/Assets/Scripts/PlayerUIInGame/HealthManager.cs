@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,14 @@ public class HealthManager : MonoBehaviour
     public float currentHealth = 75f;
     public Image healthBar;
     public Image health;
+    public GameObject gameOverPanel;
+    
+    private EscapeMenu escapeMenu;
+
+    private void Awake()
+    {
+        escapeMenu = GetComponent<EscapeMenu>();
+    }
 
     void Start()
     {
@@ -19,6 +28,15 @@ public class HealthManager : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         UpdateHealthBar();
+        if (gameOverPanel != null && currentHealth == 0)
+        {
+            var width = gameOverPanel.GetComponent<RectTransform>().rect.width;
+            gameOverPanel.transform.position -= new Vector3(width, 0, 0);
+            if (escapeMenu != null)
+            {
+                escapeMenu.PauseGame(gameOverPanel);
+            }
+        }
     }
     
     public void Heal(float heal)

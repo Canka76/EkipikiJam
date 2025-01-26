@@ -19,6 +19,7 @@ public class GunWithModes : MonoBehaviour
         public float fireRate = 1f;              // Fire rate in shots per second
         public int burstCount = 1;               // Number of shots for burst mode (if applicable)
         public bool autoFire = false;            // True for automatic firing
+        public Sprite displayImage;              // Image to display for the mode
     }
 
     public GunMode[] gunModes;                  // Array of available gun modes
