@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MeleeAI : MonoBehaviour
 {
@@ -13,15 +14,15 @@ public class MeleeAI : MonoBehaviour
     [Header("References")]
     public Transform player;
 
-    private UnityEngine.AI.NavMeshAgent agent;
-    private float fireTimer;
+    private NavMeshAgent agent;
+    private float attackTimer;
 
-    private enum EnemyState { Chasing, Attacking }
+    private enum EnemyState { Idle, Chasing, Attacking }
     private EnemyState currentState;
 
     void Start()
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
         // Find player by tag
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -32,32 +33,61 @@ public class MeleeAI : MonoBehaviour
         else
         {
             Debug.LogError("Player with tag 'Player' not found!");
+            enabled = false; // Disable script to avoid errors
+            return;
         }
 
-        currentState = EnemyState.Chasing;
+        if (agent == null)
+        {
+            Debug.LogError("NavMeshAgent component not found on the enemy!");
+            enabled = false; // Disable script if NavMeshAgent is missing
+            return;
+        }
+
+        currentState = EnemyState.Idle;
     }
 
     void Update()
     {
-        if (player == null) return; // Exit if player reference is missing
+        if (player == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayerSqr = (player.position - transform.position).sqrMagnitude;
+        float chaseRangeSqr = chaseRange * chaseRange;
+        float attackRangeSqr = attackRange * attackRange;
 
         switch (currentState)
         {
+            case EnemyState.Idle:
+                if (distanceToPlayerSqr <= chaseRangeSqr)
+                {
+                    currentState = EnemyState.Chasing;
+                }
+                break;
+
             case EnemyState.Chasing:
-                ChasePlayer();
-                if (distanceToPlayer <= attackRange)
+                if (distanceToPlayerSqr > chaseRangeSqr)
+                {
+                    currentState = EnemyState.Idle;
+                    agent.SetDestination(transform.position); // Stop movement
+                }
+                else if (distanceToPlayerSqr <= attackRangeSqr)
                 {
                     currentState = EnemyState.Attacking;
+                }
+                else
+                {
+                    ChasePlayer();
                 }
                 break;
 
             case EnemyState.Attacking:
-                AttackPlayer();
-                if (distanceToPlayer > attackRange)
+                if (distanceToPlayerSqr > attackRangeSqr)
                 {
                     currentState = EnemyState.Chasing;
+                }
+                else
+                {
+                    AttackPlayer();
                 }
                 break;
         }
@@ -67,14 +97,31 @@ public class MeleeAI : MonoBehaviour
     {
         if (agent != null && player != null)
         {
+            agent.isStopped = false;
             agent.SetDestination(player.position);
+
+            // Smoothly rotate towards the player
+            Vector3 direction = (player.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
     }
 
     private void AttackPlayer()
     {
-        fireTimer += Time.deltaTime;
-        if (fireTimer >= attackRate)
+        agent.isStopped = true; // Stop moving while attacking
+
+        // Smoothly look at the player while attacking
+        if (player != null)
+        {
+            Vector3 direction = (player.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+
+        // Handle attack timing
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackRate)
         {
             if (player != null)
             {
@@ -88,7 +135,7 @@ public class MeleeAI : MonoBehaviour
                     Debug.LogError("Player does not have a HealthManager component!");
                 }
             }
-            fireTimer = 0f;
+            attackTimer = 0f; // Reset the timer after attacking
         }
     }
 }
