@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GunFire : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class GunFire : MonoBehaviour
     
     [SerializeField] float damage = 25f;
     [SerializeField] string damageType = "Basic";
+
+    /*IEnumerator wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+    }*/
     
     void Start()
     {
@@ -25,12 +32,16 @@ public class GunFire : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+       // StartCoroutine(wait());
+        if(collision.gameObject.tag == "Enemy")
+            {
+                IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (damageable != null)
-        {
-            damageable.TakeDamage(damage, "Basic");
-        }
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(damage, "Basic");
+                }
+            }
         Debug.Log($"Projectile hit {collision.gameObject.name}");
         Destroy(gameObject); // Destroy on impact
     }

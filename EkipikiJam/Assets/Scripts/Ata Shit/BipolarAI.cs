@@ -38,7 +38,7 @@ public class BipolarAI : MonoBehaviour
         {
             shootScript.enabled = false;
             Debug.Log("Çalışmadı");
-            ai.distanceFollow = 1;
+            ai.distanceFollow = 3;
         }
         yield return new WaitForSeconds(2);
         StartCoroutine(changeEmotion());
