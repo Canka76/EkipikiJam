@@ -3789,6 +3789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3884362676120865176, guid: fa2b63a9c522183489f3253c4f5202a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.08
+      objectReference: {fileID: 0}
     - target: {fileID: 6090885592961822104, guid: fa2b63a9c522183489f3253c4f5202a9, type: 3}
       propertyPath: player
       value: 
@@ -7598,8 +7602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7684650c2cef214da2f966b33b2fc39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 100000
+  currentHealth: 13.9
   healthBar: {fileID: 398460950113795734}
   health: {fileID: 2577695670336396147}
   gameOverPanel: {fileID: 594140339}

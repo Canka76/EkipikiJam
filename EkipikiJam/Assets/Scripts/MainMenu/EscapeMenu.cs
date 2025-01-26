@@ -84,7 +84,7 @@ public class EscapeMenu : MonoBehaviour
     
     public void OnButtonMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Scenes/MainMenu");
     }
     
     public void OnButtonResume()
