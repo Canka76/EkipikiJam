@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyDamageReceiver : MonoBehaviour, IDamageable
 {
     [SerializeField] float health = 100f;
+    [SerializeField] float scalefactor = 1.2f;
+    
 
     public void TakeDamage(float damage, string damageType)
     {
