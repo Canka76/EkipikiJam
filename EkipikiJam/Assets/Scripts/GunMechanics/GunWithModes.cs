@@ -4,12 +4,12 @@ using UnityEngine;
 public class GunWithModes : MonoBehaviour
 {
     public GameObject UltGun;
-
+   
     [SerializeField]
     private float holdDuration = 2.0f; // Time in seconds to trigger the function
 
     private float holdTime = 0f;
-    private bool isHolding = false;
+    public bool isHolding = false;
 
     [System.Serializable]
     public class GunMode
@@ -19,7 +19,7 @@ public class GunWithModes : MonoBehaviour
         public float fireRate = 1f;              // Fire rate in shots per second
         public int burstCount = 1;               // Number of shots for burst mode (if applicable)
         public bool autoFire = false;            // True for automatic firing
-        public AudioClip gunShot;                // Gunshot sound
+        public Sprite displayImage;              // Image to display for the mode
     }
 
     public GunMode[] gunModes;                  // Array of available gun modes
@@ -28,68 +28,60 @@ public class GunWithModes : MonoBehaviour
 
     private float fireCooldown = 0f;            // Cooldown timer for firing
     private bool isFiring = false;              // For automatic firing control
-    public AudioSource audioSource;            // For playing gunshot sounds
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            Debug.LogWarning("No AudioSource found on the GameObject. Gun sounds will not play.");
-        }
-    }
-
-    private void Update()
+    void Update()
     {
         HandleInput();
         HandleFireCooldown();
-        HandleUltimateGun();
+        
+        ULtGun();
+        
     }
 
-    private void HandleUltimateGun()
+    private void ULtGun()
     {
-        if (currentModeIndex != 2 || UltGun == null) return;
-
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && currentModeIndex.Equals(2))
         {
             if (!isHolding)
             {
-                isHolding = true;
-                holdTime = 0f; // Start tracking hold time
-                UltGun.SetActive(true);
-                UltGun.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), holdDuration);
+                return;
             }
-
+            holdTime = 0f;
+            // Increment the hold time
             holdTime += Time.deltaTime;
-
+            
+            UltGun.SetActive(true);
+            UltGun.transform.DOScale(new Vector3(.30f, .30f, .30f), holdDuration);
+            
+            
             if (holdTime >= holdDuration)
             {
-                TriggerUltimateEffect();
+                TriggerFunction();
                 ResetHold();
+                    
             }
         }
         else
         {
+            // Reset if the mouse button is released
             ResetHold();
         }
     }
-
+    
     private void ResetHold()
     {
-        isHolding = false;
+        isFiring = false;
         holdTime = 0f;
-
-        if (UltGun != null)
-        {
-            UltGun.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.3f);
-            UltGun.SetActive(false);
-        }
+        UltGun.transform.DOScale(new Vector3(.10f, .10f, .10f), 0.3f);
+        UltGun.SetActive(false);
     }
-
-    private void TriggerUltimateEffect()
+        
+    private void TriggerFunction()
     {
-        if (currentModeIndex < 0 || currentModeIndex >= gunModes.Length) return;
-
+        if (currentModeIndex.Equals(-1))
+        {
+            return;
+        }
         var currentMode = gunModes[currentModeIndex];
         isFiring = true;
         TryFire(currentMode);
@@ -97,24 +89,27 @@ public class GunWithModes : MonoBehaviour
 
     private void HandleInput()
     {
-        if (gunModes.Length > 0 && currentModeIndex >= 0)
+
+        // Fire based on the current mode
+        if (gunModes.Length > 0 && !currentModeIndex.Equals(-1))
         {
             var currentMode = gunModes[currentModeIndex];
 
-            if (currentMode.autoFire && Input.GetButton("Fire1"))
+            if (currentMode.autoFire && Input.GetButton("Fire1") && !currentModeIndex.Equals(3)) // Hold down for auto-fire modes
             {
                 isFiring = true;
                 TryFire(currentMode);
             }
-            else if (Input.GetButtonDown("Fire1"))
+            else if (Input.GetButtonDown("Fire1") && !currentModeIndex.Equals(3)) // Single shot or burst on mouse click
             {
                 isFiring = true;
                 TryFire(currentMode);
             }
-            else if (Input.GetButtonUp("Fire1"))
+            else if (Input.GetButtonUp("Fire1") && !currentModeIndex.Equals(3))
             {
                 isFiring = false;
             }
+            
         }
     }
 
@@ -130,16 +125,16 @@ public class GunWithModes : MonoBehaviour
     {
         if (fireCooldown <= 0f)
         {
-            if (mode.burstCount > 1)
+            if (mode.burstCount > 1) // Burst mode handling
             {
                 StartCoroutine(FireBurst(mode));
             }
-            else
+            else // Single shot or auto-fire
             {
                 FireProjectile(mode);
             }
 
-            fireCooldown = 1f / mode.fireRate;
+            fireCooldown = 1f / mode.fireRate; // Reset cooldown based on fire rate
         }
     }
 
@@ -157,11 +152,6 @@ public class GunWithModes : MonoBehaviour
         if (mode.projectilePrefab != null && firePoint != null)
         {
             Instantiate(mode.projectilePrefab, firePoint.position, firePoint.rotation);
-
-            if (audioSource != null && mode.gunShot != null)
-            {
-                audioSource.PlayOneShot(mode.gunShot);
-            }
         }
         else
         {

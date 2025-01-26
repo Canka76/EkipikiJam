@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Gun3Interact : Interactable
 {
-    public SkillManager skillManager;
+    public SkillManagerRefactor skillManager;
     
     public override void OnFocus()
     {

@@ -10,6 +10,7 @@ public class SkillManagerRefactor : MonoBehaviour
     public GameObject skillPanel;
     public GameObject skillCellPrefab;
     public Sprite skillCellSelected;
+    public Sprite initalSprite;
 
     [SerializeField] private float explosiveCooldown = 5f;
     [SerializeField] private float iceGunCooldown = 5f;
@@ -105,13 +106,14 @@ public class SkillManagerRefactor : MonoBehaviour
         {
             activeModes.Add(mode);
             gunWithModes.SetMode(mode);
-            CreateSkillCell(modeName);
+            CreateSkillCell(mode);
         }
     }
 
-    private void CreateSkillCell(string modeName)
+    private void CreateSkillCell(GunWithModes.GunMode mode)
     {
         var skillCell = Instantiate(skillCellPrefab, skillPanel.transform);
-        skillCell.name = modeName;
+        skillCell.name = mode.modeName;
+        skillCell.GetComponent<Image>().sprite = mode.displayImage != null ? mode.displayImage : initalSprite;
     }
 }
