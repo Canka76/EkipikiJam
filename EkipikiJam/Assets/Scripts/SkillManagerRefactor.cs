@@ -17,18 +17,25 @@ public class SkillManagerRefactor : MonoBehaviour
 
     
     private int selectedIndex = 0;
-    private List<GunWithModes.GunMode> activeModes = new List<GunWithModes.GunMode>();
+    public List<GunWithModes.GunMode> activeModes = new List<GunWithModes.GunMode>();
     private float[] cooldownTimers;
 
     private void Start()
     {
         cooldownTimers = new float[] { 0f, explosiveCooldown, iceGunCooldown }; // Initialize cooldown timers
+        foreach (GunWithModes.GunMode mode in activeModes)
+        {
+            selectedIndex = activeModes.IndexOf(mode);
+            gunWithModes.SetMode(mode);
+            GameObject skillCell = Instantiate(skillCellPrefab, skillPanel.transform);
+            skillCell.name = mode.modeName;
+            skillCell.GetComponent<Image>().sprite = mode.displayImage != null ? mode.displayImage : initalSprite; 
+        }
     }
 
     private void Update()
     {
         HandleInput();
-        UpdateUI();
         HandleCooldowns();
         ResetToDefaultMode();
     }
@@ -42,16 +49,6 @@ public class SkillManagerRefactor : MonoBehaviour
                 SwitchMode(i);
                 StartCooldown(i);
             }
-        }
-    }
-
-    private void UpdateUI()
-    {
-        foreach (var skillCell in skillPanel.GetComponentsInChildren<Image>())
-        {
-            skillCell.sprite = gunWithModes.gunModes[gunWithModes.currentModeIndex].modeName == skillCell.name 
-                ? skillCellSelected 
-                : null;
         }
     }
 
@@ -100,20 +97,26 @@ public class SkillManagerRefactor : MonoBehaviour
 
     public void ActivateMode(string modeName)
     {
-        var mode = gunWithModes.gunModes.FirstOrDefault(gunMode => gunMode.modeName == modeName);
-
-        if (mode != null && !activeModes.Contains(mode))
+        foreach (GunWithModes.GunMode mode in gunWithModes.gunModes)
         {
-            activeModes.Add(mode);
-            gunWithModes.SetMode(mode);
-            CreateSkillCell(mode);
+            if (mode.modeName == modeName)
+            {
+                Debug.Log(mode.modeName);
+                if (!activeModes.Contains(mode))
+                {
+                    activeModes.Add(mode);
+                    selectedIndex = activeModes.IndexOf(mode);
+                    gunWithModes.SetMode(mode);
+                    GameObject skillCell = Instantiate(skillCellPrefab, skillPanel.transform);
+                    skillCell.name = modeName;
+                    skillCell.GetComponent<Image>().sprite = mode.displayImage != null ? mode.displayImage : initalSprite;
+                }
+            }
         }
-    }
-
-    private void CreateSkillCell(GunWithModes.GunMode mode)
-    {
-        var skillCell = Instantiate(skillCellPrefab, skillPanel.transform);
-        skillCell.name = mode.modeName;
-        skillCell.GetComponent<Image>().sprite = mode.displayImage != null ? mode.displayImage : initalSprite;
+      
+        if (activeModes.Count > 0)
+        { 
+            gunWithModes.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 }

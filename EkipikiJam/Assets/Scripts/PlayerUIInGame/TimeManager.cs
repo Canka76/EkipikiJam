@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
+        elapsedTime += Time.deltaTime; 
         timer = TimeSpan.FromSeconds(elapsedTime);
         timerGameObject.text = $"Timer: {timer.Minutes:00}:{timer.Seconds:00}";
     }
