@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1964187905095768803}
   - component: {fileID: 6507522705604737873}
   - component: {fileID: 2990650216248403543}
+  - component: {fileID: 8348220153247732192}
   m_Layer: 9
   m_Name: MeleeAI
   m_TagString: Untagged
@@ -151,3 +152,16 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8348220153247732192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444934286756887857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4285f408a7614924b880e98740235f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 200
